@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import TaskCard from "../Components/TaskCard"
 import TaskForm from "../Components/TaskForm"
 import FilterBar from "../Components/FilterBar"
-import "../styles/Dashboard.css"
+import "../Styles/Dashboard.css"
 
 function Dashboard() {
 
