@@ -1,0 +1,662 @@
+/* ===== GLOBAL ===== */
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+
+/* ===== DASHBOARD ===== */
+
+.dashboard-container{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+  min-height:100vh;
+  transition:all 0.3s ease;
+}
+
+
+/* ===== HEADER ===== */
+
+.top-bar{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.dashboard-title{
+  font-size:34px;
+  font-weight:700;
+  text-align:center;
+}
+
+.theme-toggle{
+  position:absolute;
+  right:0;
+  top:0;
+  background:#6366f1;
+  color:white;
+  border:none;
+  border-radius:50%;
+  width:42px;
+  height:42px;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.25s;
+}
+
+.theme-toggle:hover{
+  transform:scale(1.1);
+}
+
+
+/* ===== LIGHT MODE ===== */
+
+.dashboard-container.light{
+  background:#f5f7fb;
+  color:#2d3748;
+}
+
+.light .task-card{
+  background:white;
+}
+
+.light .task-form{
+  background:white;
+}
+
+.light .filter-bar button{
+  background:white;
+  color:#1f2937;
+  border:1px solid #e2e8f0;
+}
+
+.light .search-bar{
+  background:white;
+}
+
+
+/* ===== DARK MODE ===== */
+
+.dashboard-container.dark{
+  background:#0f172a;
+  color:#e2e8f0;
+}
+
+.dark .task-card{
+  background:#1e293b;
+}
+
+.dark .task-form{
+  background:#1e293b;
+}
+
+.dark .filter-bar button{
+  background:#334155;
+  color:white;
+}
+
+.dark .search-bar{
+  background:#1e293b;
+  color:white;
+  border:none;
+}
+
+.dark .task-description{
+  color:#cbd5f5;
+}
+
+.dark .task-meta{
+  color:#94a3b8;
+}
+
+
+/* ===== SEARCH ===== */
+
+.search-bar{
+  width:100%;
+  padding:12px 15px;
+  border-radius:8px;
+  border:1px solid #e2e8f0;
+  margin-bottom:20px;
+  font-size:14px;
+}
+
+/* Mobile search improvements */
+@media(max-width:480px){
+  .search-bar{
+    padding:14px 12px;
+    font-size:16px; /* Prevents zoom on iOS */
+  }
+}
+
+
+/* ===== FILTER ===== */
+
+.filter-bar{
+  display:flex;
+  gap:10px;
+  margin-bottom:25px;
+  flex-wrap:wrap;
+}
+
+.filter-bar button{
+  padding:8px 16px;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:500;
+  transition:0.2s;
+  border:none;
+  white-space:nowrap; /* Prevents text wrapping */
+}
+
+.filter-bar button:hover{
+  background:#6366f1;
+  color:white;
+}
+
+/* Mobile filter improvements */
+@media(max-width:480px){
+  .filter-bar{
+    gap:8px;
+    justify-content:center;
+  }
+  
+  .filter-bar button{
+    padding:8px 14px;
+    font-size:13px;
+    flex:1 1 auto;
+    min-width:70px;
+  }
+}
+
+/* Small phones */
+@media(max-width:360px){
+  .filter-bar{
+    flex-direction:column;
+    align-items:stretch;
+  }
+  
+  .filter-bar button{
+    width:100%;
+  }
+}
+
+
+/* ===== FORM ===== */
+
+.task-form{
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+  margin-bottom:30px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.form-title{
+  grid-column:span 2;
+  font-size:18px;
+  font-weight:600;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+}
+
+.form-group label{
+  font-size:13px;
+  margin-bottom:4px;
+}
+
+.form-group input,
+.form-group select{
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #e2e8f0;
+  font-size:14px;
+  width:100%;
+}
+
+/* Mobile form improvements */
+@media(max-width:480px){
+  .task-form{
+    padding:20px 15px;
+    gap:12px;
+  }
+  
+  .form-group input,
+  .form-group select{
+    padding:12px 10px; /* Larger touch target */
+    font-size:16px; /* Prevents zoom on iOS */
+  }
+}
+
+
+/* ===== FORM BUTTON ===== */
+
+.submit-btn{
+  grid-column:span 2;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:#6366f1;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.submit-btn:hover{
+  background:#4f46e5;
+}
+
+/* Mobile button improvements */
+@media(max-width:480px){
+  .submit-btn{
+    padding:14px; /* Larger touch target */
+    font-size:16px;
+  }
+}
+
+
+/* ===== TASK LIST ===== */
+
+.task-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+/* Mobile task list */
+@media(max-width:768px){
+  .task-list{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+}
+
+@media(max-width:480px){
+  .task-list{
+    gap:12px;
+  }
+}
+
+
+/* ===== TASK CARD ===== */
+
+.task-card{
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.05);
+  transition:0.25s;
+}
+
+.task-card:hover{
+  transform:translateY(-5px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.12);
+}
+
+/* Mobile card improvements */
+@media(max-width:480px){
+  .task-card{
+    padding:16px;
+  }
+  
+  .task-card:hover{
+    transform:translateY(-2px); /* Less dramatic on mobile */
+  }
+}
+
+
+/* ===== TASK HEADER ===== */
+
+.task-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.task-title{
+  font-size:16px;
+  font-weight:600;
+}
+
+@media(max-width:480px){
+  .task-title{
+    font-size:15px;
+  }
+}
+
+
+/* ===== DESCRIPTION ===== */
+
+.task-description{
+  margin:10px 0;
+  font-size:14px;
+  word-wrap:break-word; /* Prevents overflow */
+}
+
+@media(max-width:480px){
+  .task-description{
+    font-size:13px;
+    margin:8px 0;
+  }
+}
+
+
+/* ===== META ===== */
+
+.task-meta{
+  font-size:13px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+
+@media(max-width:480px){
+  .task-meta{
+    font-size:12px;
+    flex-direction:column;
+    gap:2px;
+  }
+}
+
+
+/* ===== STATUS BADGES ===== */
+
+.status{
+  padding:4px 10px;
+  border-radius:15px;
+  font-size:12px;
+  font-weight:600;
+  display:inline-block;
+  white-space:nowrap;
+}
+
+.pending{
+  background:#fde68a;
+  color:#92400e;
+}
+
+.in-progress{
+  background:#bfdbfe;
+  color:#1e40af;
+}
+
+.completed{
+  background:#bbf7d0;
+  color:#166534;
+}
+
+@media(max-width:480px){
+  .status{
+    padding:4px 8px;
+    font-size:11px;
+  }
+}
+
+
+/* ===== BUTTONS ===== */
+
+.task-buttons{
+  margin-top:15px;
+  display:flex;
+  gap:10px;
+}
+
+.task-buttons button{
+  border:none;
+  padding:7px 12px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+  transition:0.2s;
+  flex:1; /* Makes buttons equal width */
+}
+
+.edit-btn{
+  background:#6366f1;
+  color:white;
+}
+
+.delete-btn{
+  background:#ef4444;
+  color:white;
+}
+
+.task-buttons button:hover{
+  transform:scale(1.05);
+}
+
+/* Mobile button improvements */
+@media(max-width:480px){
+  .task-buttons{
+    gap:8px;
+  }
+  
+  .task-buttons button{
+    padding:10px 8px; /* Larger touch target */
+    font-size:13px;
+  }
+}
+
+@media(max-width:360px){
+  .task-buttons{
+    flex-direction:column;
+    gap:5px;
+  }
+}
+
+
+/* ===== PROGRESS ===== */
+
+.progress-container{
+  margin-bottom:25px;
+}
+
+.progress-bar{
+  height:8px;
+  background:#e2e8f0;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  background:#6366f1;
+  transition:0.3s;
+}
+
+@media(max-width:480px){
+  .progress-container{
+    margin-bottom:20px;
+  }
+}
+
+
+/* ===== PAGINATION ===== */
+
+.pagination{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:30px;
+  flex-wrap:wrap;
+}
+
+.pagination button{
+  padding:8px 14px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  background:#e2e8f0;
+  transition:0.2s;
+  min-width:40px; /* Consistent size */
+}
+
+.pagination button:hover{
+  background:#6366f1;
+  color:white;
+}
+
+.active-page{
+  background:#6366f1 !important;
+  color:white;
+}
+
+/* Mobile pagination improvements */
+@media(max-width:480px){
+  .pagination{
+    gap:6px;
+    margin-top:25px;
+  }
+  
+  .pagination button{
+    padding:10px 12px; /* Larger touch target */
+    font-size:13px;
+    min-width:36px;
+  }
+}
+
+@media(max-width:360px){
+  .pagination{
+    gap:4px;
+  }
+  
+  .pagination button{
+    padding:8px 10px;
+    font-size:12px;
+    min-width:32px;
+  }
+}
+
+
+/* ===== EMPTY ===== */
+
+.empty{
+  text-align:center;
+  color:#718096;
+  grid-column:1/-1; /* Spans full width */
+  padding:40px 20px;
+}
+
+@media(max-width:480px){
+  .empty{
+    padding:30px 15px;
+    font-size:14px;
+  }
+}
+
+
+/* ===== RESPONSIVE DASHBOARD CONTAINER ===== */
+
+@media(max-width:768px){
+  .dashboard-container{
+    padding:30px 16px;
+  }
+  
+  .dashboard-title{
+    font-size:28px;
+  }
+}
+
+@media(max-width:480px){
+  .dashboard-container{
+    padding:20px 12px;
+  }
+  
+  .dashboard-title{
+    font-size:24px;
+  }
+  
+  .theme-toggle{
+    width:38px;
+    height:38px;
+    font-size:16px;
+  }
+}
+
+@media(max-width:360px){
+  .dashboard-container{
+    padding:15px 10px;
+  }
+  
+  .dashboard-title{
+    font-size:22px;
+  }
+  
+  .theme-toggle{
+    width:34px;
+    height:34px;
+    font-size:14px;
+  }
+}
+
+
+/* ===== ADDITIONAL MOBILE OPTIMIZATIONS ===== */
+
+/* Improve touch targets */
+@media(max-width:768px){
+  button, 
+  .filter-bar button,
+  .task-buttons button,
+  .pagination button,
+  .theme-toggle,
+  .submit-btn{
+    min-height:44px; /* Apple's recommended minimum touch target size */
+  }
+}
+
+/* Prevent text overflow */
+.task-title,
+.task-description,
+.task-meta{
+  overflow-wrap:break-word;
+  word-wrap:break-word;
+  hyphens:auto;
+}
+
+/* Smooth scrolling on mobile */
+@media(max-width:768px){
+  *{
+    -webkit-tap-highlight-color:transparent; /* Removes tap highlight on iOS */
+  }
+  
+  body{
+    -webkit-overflow-scrolling:touch;
+  }
+}
+
+/* Landscape mode optimization */
+@media(max-width:896px) and (orientation:landscape){
+  .task-list{
+    grid-template-columns:1fr 1fr;
+  }
+  
+  .dashboard-container{
+    padding:20px 16px;
+  }
+}
+
+/* Tablet optimization */
+@media(min-width:768px) and (max-width:1024px){
+  .dashboard-container{
+    padding:35px 24px;
+    max-width:900px;
+  }
+  
+  .task-list{
+    grid-template-columns:repeat(2, 1fr);
+    gap:18px;
+  }
+}
