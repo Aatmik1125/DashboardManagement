@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import TaskCard from "../Components/TaskCard"
 import TaskForm from "../Components/TaskForm"
-import FilterBar from "../components/FilterBar"
+import FilterBar from "../Components/FilterBar"
 import "../styles/dashboard.css"
 
 function Dashboard() {
